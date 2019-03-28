@@ -1,0 +1,14 @@
+server:
+  port: 8762
+eureka:
+  server:
+     enable-self-preservation: false #关闭自我保护模式  不推荐在生产环境使用
+  instance:
+    hostname: eureka2
+  client:
+    #register-with-eureka: false 默认为true  此处代表将此实例注册到另一个注册中心
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  application:
+    name: eureka

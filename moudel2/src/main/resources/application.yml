@@ -1,0 +1,21 @@
+
+server:
+  port: 8768
+spring:
+  application:
+    name: logout
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8762/eureka/,http://localhost:8761/eureka/
+redis:
+  host: 127.0.0.1
+  port: 6379
+  pool:
+    MaxTotal: 50
+    MaxIdle: 10
+    MaxWaitMillis: 1000
+    testOnBorrow: true
+
+
+

@@ -1,0 +1,17 @@
+server:
+  port: 8904
+eureka:
+  client:
+    service-url:
+       defauleZone: http://192.168.96.1:8761/eureka/,http://192.168.96.1:8762/eureka/,
+spring:
+  application:
+    name: zuul
+ribbon: #ribbon默认懒加载
+  ReadTimeout: 60000  # 单位毫秒数
+  SocketTimeout: 60000
+zuul:
+  routes:
+    feign:
+      path: /feign/**
+      serviceId: feign
