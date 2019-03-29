@@ -7,11 +7,15 @@ eureka:
 spring:
   application:
     name: zuul
-ribbon: #ribbon默认懒加载
-  ReadTimeout: 60000  # 单位毫秒数
-  SocketTimeout: 60000
+
 zuul:
   routes:
     feign:
       path: /feign/**
       serviceId: feign
+  ribbon: #默认懒加载，第一次请求容易超时
+    ReadTimeout: 6000     #超时时间
+    ConnectTimeout: 3000 #
+    eager-load: #饥饿加载
+      enabled: true
+      clients: feign

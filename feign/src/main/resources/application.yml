@@ -1,5 +1,5 @@
 server:
-  port: 9090
+  port: 9091
 redis:
   host: 127.0.0.1
   port: 6379
@@ -17,4 +17,4 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 feign: #开启断路器
   hystrix:
-    enabled: false
+    enabled: true

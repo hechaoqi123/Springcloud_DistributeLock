@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 //库存系统
 @RestController
 public class test {
+    @Autowired
+    TestService service;
    public static Integer repositoryNum=100;//初始库存
    public static Integer shellNum=0;//剩余库存数
    //检查库存是否充足
@@ -23,14 +25,8 @@ public class test {
     }
    //出库
    @RequestMapping("/reduce")
-    public Integer reduce(int num){
+    public Integer reduce(int num) throws Exception {
         return service.sell(num);
     }
 
-    @Autowired
-    TestService service;
-    @RequestMapping("/hello")
-    public String hello() {
-        return service.delete();
-    }
 }

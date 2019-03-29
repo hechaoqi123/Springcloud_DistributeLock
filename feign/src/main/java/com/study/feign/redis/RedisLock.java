@@ -39,19 +39,13 @@ public class RedisLock {
             String identifier = UUID.randomUUID().toString();
             // 锁名，即key值
             String lockKey = "lock:" + locaName;
-
-
-
-
             // 获取锁的超时时间，超过这个时间则放弃获取锁
             long end = System.currentTimeMillis() + requestTimeout;
             while (System.currentTimeMillis() < end) {
-                //设置
-                System.out.println(Thread.currentThread().getName()+"尝试加锁");
+                //加锁，原子操作
                 String result=jedis.set(lockKey, identifier,"NX","PX",lockTimeout);
                 if ("OK".equals(result)) {//成功加锁
                     // 返回唯一标识，作为释放锁时的凭证
-                    System.out.println(Thread.currentThread().getName()+"获取到了锁:"+lockKey+"，令牌为"+identifier);
                     return identifier;
                 }
                 try {
@@ -87,11 +81,9 @@ public class RedisLock {
                     // 监视lock，准备开始事务
                     jedis.watch(lockKey);
                     // 通过前面返回的value值判断是不是该锁，若是该锁，则删除，释放锁
-                    System.out.println(Thread.currentThread().getName()+"开始释放锁，令牌为："+identifier+"持有锁线程为:"+jedis.get(lockKey));
                     if (identifier.equals(jedis.get(lockKey))) {
                         Transaction transaction = jedis.multi();
                         transaction.del(lockKey);
-                        System.out.println(Thread.currentThread().getName()+"开始释放锁");
                         List<Object> results = transaction.exec();
                         if (results == null) {
                             continue;

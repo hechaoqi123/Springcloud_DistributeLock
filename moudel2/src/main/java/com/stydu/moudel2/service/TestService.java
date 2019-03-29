@@ -8,5 +8,5 @@ package com.stydu.moudel2.service;
  */
 
 public interface TestService {
-    Integer  sell(int num);
+    Integer  sell(int num) throws Exception;
 }

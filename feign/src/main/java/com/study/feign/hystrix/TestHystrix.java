@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
  * author:hcq
  * createTime:2019-03-22 12:03
  */
-/*@Component*/
+@Component
 public class TestHystrix implements testFeign {
-    /*@Override
+    @Override
     public String consumer() {
         return "sorry 此服务出现了点问题";
-    }*/
+    }
 }
